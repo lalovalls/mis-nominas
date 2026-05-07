@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Nóminas" />
+  <title>Mis Nóminas</title>
+
+  <!-- Favicon y apple icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzExMTExMSIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIHNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiAKICAgICAgICBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+4oKsPC90ZXh0Pgo8L3N2Zz4=">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiI+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSI0MCIgZmlsbD0iIzExMTExMSIvPgogIDx0ZXh0IHg9Ijk2IiB5PSIxNDAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIxMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIAogICAgICAgIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iYXV0byI+4oKsPC90ZXh0Pgo8L3N2Zz4=">
+
+  <script>
+    const ICON_B64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIiB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiI+CiAgPHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSI0MCIgZmlsbD0iIzExMTExMSIvPgogIDx0ZXh0IHg9Ijk2IiB5PSIxNDAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIxMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIAogICAgICAgIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iYXV0byI+4oKsPC90ZXh0Pgo8L3N2Zz4=";
+    const manifestData = {
+      name:"Mis Nóminas", short_name:"Nóminas", start_url:".", display:"standalone",
+      background_color:"#111111", theme_color:"#111111",
+      icons:[
+        {src: ICON_B64, sizes:"192x192", type:"image/svg+xml"},
+        {src: ICON_B64, sizes:"512x512", type:"image/svg+xml"}
+      ]
+    };
+    document.addEventListener('DOMContentLoaded',()=>{
+      const l=document.createElement('link'); l.rel='manifest';
+      l.href=URL.createObjectURL(new Blob([JSON.stringify(manifestData)],{type:'application/json'}));
+      document.head.appendChild(l);
+    });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black:#111111; --gray900:#1a1a1a; --gray800:#262626; --gray600:#525252;
+      --gray400:#a3a3a3; --gray200:#e5e5e5; --gray100:#f5f5f5; --white:#ffffff;
+      --accent:#16a34a; --accent-light:#dcfce7;
+      --red:#dc2626; --red-light:#fef2f2;
+      --amber:#b45309; --amber-light:#fffbeb;
+      --blue:#1d4ed8; --blue-light:#eff6ff;
+      --safe-top:env(safe-area-inset-top,0px);
+      --safe-bottom:env(safe-area-inset-bottom,0px);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{font-family:'IBM Plex Sans',sans-serif;background:var(--gray100);color:var(--black);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+    /* HEADER */
+    .header{background:var(--black);color:var(--white);padding:calc(var(--safe-top) + 24px) 20px 22px}
+    .header-eyebrow{font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gray400);margin-bottom:10px}
+    .header-title{font-size:1.45rem;font-weight:600;letter-spacing:-.01em;line-height:1.15;margin-bottom:2px}
+    .header-sub{font-size:.75rem;color:var(--gray400);font-weight:400;margin-bottom:20px}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray800);border:1px solid var(--gray800);border-radius:10px;overflow:hidden}
+    .stat-cell{background:var(--gray900);padding:13px 14px}
+    .stat-cell-label{font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--gray400);margin-bottom:5px}
+    .stat-cell-value{font-family:'IBM Plex Mono',monospace;font-size:1.1rem;font-weight:500;color:var(--white);letter-spacing:-.02em}
+    .stat-cell-value.accent{color:var(--accent)}
+
+    /* TABS */
+    .tabs-wrap{background:var(--white);border-bottom:1px solid var(--gray200);position:sticky;top:0;z-index:100}
+    .tabs{display:flex;max-width:600px;margin:0 auto}
+    .tab-btn{flex:1;padding:13px 8px;border:none;background:transparent;color:var(--gray400);font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:.78rem;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.01em}
+    .tab-btn.active{color:var(--black);border-bottom-color:var(--black)}
+
+    /* CONTENT */
+    .content{padding:16px;padding-bottom:calc(var(--safe-bottom) + 32px);max-width:600px;margin:0 auto}
+
+    /* PILLS */
+    .month-pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;margin-bottom:14px;scrollbar-width:none}
+    .month-pills::-webkit-scrollbar{display:none}
+    .month-pill{flex-shrink:0;padding:6px 14px;border-radius:4px;border:1px solid var(--gray200);background:var(--white);color:var(--gray600);font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:.78rem;cursor:pointer;transition:all .12s}
+    .month-pill.active{background:var(--black);border-color:var(--black);color:var(--white)}
+
+    /* CARD */
+    .card{background:var(--white);border-radius:10px;border:1px solid var(--gray200);overflow:hidden;margin-bottom:12px}
+    .card-head{display:flex;justify-content:space-between;align-items:flex-start;padding:16px 18px;border-bottom:1px solid var(--gray200)}
+    .card-title{font-size:.95rem;font-weight:600;color:var(--black);letter-spacing:-.01em}
+    .card-sub{font-size:.72rem;color:var(--gray400);margin-top:2px;font-weight:400}
+    .neto-label{font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--gray400);text-align:right;margin-bottom:3px}
+    .neto-value{font-family:'IBM Plex Mono',monospace;font-size:1.45rem;font-weight:600;color:var(--accent);text-align:right;letter-spacing:-.02em}
+
+    .section-label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--gray400);padding:12px 18px 8px;background:var(--gray100);border-bottom:1px solid var(--gray200)}
+    .data-row{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-bottom:1px solid var(--gray100)}
+    .data-row:last-child{border-bottom:none}
+    .row-label{font-size:.82rem;color:var(--gray600);font-weight:400}
+    .row-value{font-family:'IBM Plex Mono',monospace;font-size:.82rem;font-weight:500;color:var(--black);display:flex;align-items:center;gap:7px;letter-spacing:-.01em}
+    .row-value.red{color:var(--red)}
+    .total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 18px}
+    .total-label{font-size:.78rem;font-weight:600;color:var(--black);text-transform:uppercase;letter-spacing:.04em}
+    .total-value{font-family:'IBM Plex Mono',monospace;font-size:.95rem;font-weight:600;letter-spacing:-.02em}
+    .total-value.green{color:var(--accent)}
+    .total-value.red{color:var(--red)}
+    .diff-up{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:500;color:var(--accent);background:var(--accent-light);padding:1px 5px;border-radius:3px}
+    .diff-down{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:500;color:var(--red);background:var(--red-light);padding:1px 5px;border-radius:3px}
+    .notes-box{margin:0 18px 16px;padding:11px 13px;background:var(--gray100);border-radius:6px;border-left:3px solid var(--gray400)}
+    .notes-label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--gray400);margin-bottom:4px}
+    .notes-text{font-size:.78rem;color:var(--gray600);line-height:1.55}
+
+    /* ALERTS */
+    .alert-group{margin-bottom:16px}
+    .alert-group-title{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:7px;padding:0 2px}
+    .alert-item{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;border-radius:6px;margin-bottom:5px;font-size:.8rem;line-height:1.5;border:1px solid transparent}
+    .alert-ok{background:var(--accent-light);border-color:#bbf7d0;color:#14532d}
+    .alert-warn{background:var(--amber-light);border-color:#fde68a;color:#78350f}
+    .alert-alert{background:var(--red-light);border-color:#fecaca;color:#7f1d1d}
+    .alert-info{background:var(--blue-light);border-color:#bfdbfe;color:#1e3a8a}
+    .pending-box{background:var(--amber-light);border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin-top:8px}
+    .pending-title{font-size:.78rem;font-weight:600;color:var(--amber);margin-bottom:5px}
+    .pending-text{font-size:.78rem;color:#78350f;line-height:1.55}
+
+    /* FORM */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-field{display:flex;flex-direction:column;gap:5px}
+    .form-field.full{grid-column:1 / -1}
+    .form-label{font-size:.62rem;font-weight:600;color:var(--gray400);text-transform:uppercase;letter-spacing:.1em}
+    .form-input,.form-select,.form-textarea{padding:10px 11px;border-radius:6px;border:1px solid var(--gray200);font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--black);background:var(--white);outline:none;transition:border-color .12s;width:100%;-webkit-appearance:none}
+    .form-select{font-family:'IBM Plex Sans',sans-serif;font-size:.85rem}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--black)}
+    .form-textarea{resize:vertical;min-height:68px;font-family:'IBM Plex Sans',sans-serif;font-size:.82rem}
+
+    .btn-primary{width:100%;padding:14px;border-radius:8px;border:none;background:var(--black);color:var(--white);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;margin-top:16px;letter-spacing:.02em;transition:background .12s}
+    .btn-primary:active{background:var(--gray800)}
+    .btn-primary:disabled{background:var(--gray400);cursor:not-allowed}
+
+    /* PDF UPLOAD ZONE */
+    .upload-zone{border:2px dashed var(--gray200);border-radius:10px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:16px;background:var(--white)}
+    .upload-zone:hover,.upload-zone.drag{border-color:var(--black);background:var(--gray100)}
+    .upload-zone.loading{border-color:var(--accent);background:var(--accent-light);cursor:default}
+    .upload-zone.success{border-color:var(--accent);background:var(--accent-light)}
+    .upload-icon{font-size:1.8rem;margin-bottom:8px}
+    .upload-title{font-size:.88rem;font-weight:600;color:var(--black);margin-bottom:4px}
+    .upload-sub{font-size:.75rem;color:var(--gray400)}
+    .upload-input{display:none}
+
+    /* SPINNER */
+    .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--accent-light);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* EXTRACTED PREVIEW */
+    .extracted-preview{background:var(--accent-light);border:1px solid #bbf7d0;border-radius:8px;padding:14px 16px;margin-bottom:14px}
+    .extracted-title{font-size:.72rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+    .extracted-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .extracted-item{font-size:.78rem;color:#14532d}
+    .extracted-item span{font-family:'IBM Plex Mono',monospace;font-weight:600}
+
+    /* TABS ADD */
+    .add-tabs{display:flex;gap:0;background:var(--gray100);border-radius:8px;padding:3px;margin-bottom:16px}
+    .add-tab{flex:1;padding:8px;border:none;background:transparent;border-radius:6px;font-family:'IBM Plex Sans',sans-serif;font-size:.78rem;font-weight:500;color:var(--gray400);cursor:pointer;transition:all .12s}
+    .add-tab.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+    /* INSTALL BANNER */
+    .install-banner{background:var(--black);color:var(--white);border-radius:8px;padding:14px 16px;margin-bottom:14px;display:none;justify-content:space-between;align-items:center;gap:12px}
+    .install-text{font-size:.78rem;line-height:1.5}
+    .install-text strong{display:block;font-weight:600;margin-bottom:1px}
+    .btn-install{flex-shrink:0;padding:7px 14px;border-radius:5px;border:1px solid var(--gray600);background:transparent;color:var(--white);font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:.76rem;cursor:pointer}
+
+    .empty-state{text-align:center;padding:48px 20px;color:var(--gray400)}
+    .empty-state .icon{font-size:2rem;margin-bottom:12px}
+    .empty-state p{font-size:.82rem;line-height:1.7}
+
+    /* DELETE */
+    .btn-delete{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:11px;border-radius:8px;border:1px solid #fecaca;background:var(--red-light);color:var(--red);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;margin-top:4px;transition:all .12s}
+    .btn-delete:active{background:#fecaca}
+    .confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center}
+    .confirm-overlay.show{display:flex}
+    .confirm-box{background:var(--white);border-radius:16px 16px 0 0;padding:24px 20px calc(var(--safe-bottom) + 24px);width:100%;max-width:600px}
+    .confirm-title{font-size:1rem;font-weight:600;margin-bottom:6px}
+    .confirm-sub{font-size:.82rem;color:var(--gray600);margin-bottom:20px;line-height:1.5}
+    .confirm-actions{display:flex;flex-direction:column;gap:8px}
+    .btn-confirm-delete{padding:13px;border-radius:8px;border:none;background:var(--red);color:var(--white);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer}
+    .btn-confirm-cancel{padding:13px;border-radius:8px;border:1px solid var(--gray200);background:var(--white);color:var(--black);font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:.88rem;cursor:pointer}
+
+    @media(min-width:600px){
+      .header{padding-left:calc((100vw - 600px)/2 + 20px);padding-right:calc((100vw - 600px)/2 + 20px)}
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Evaria XXI SL · Auxiliar Administrativo</div>
+  <div class="header-title">Mis Nóminas</div>
+  <div class="header-sub">Valls Mier Teran Gonzalo · Antigüedad 10/03/2025</div>
+  <div class="stats-grid">
+    <div class="stat-cell"><div class="stat-cell-label">Nóminas</div><div class="stat-cell-value accent" id="stat-count">0</div></div>
+    <div class="stat-cell"><div class="stat-cell-label">Último neto</div><div class="stat-cell-value" id="stat-last">—</div></div>
+    <div class="stat-cell"><div class="stat-cell-label">Media neta</div><div class="stat-cell-value" id="stat-avg">—</div></div>
+    <div class="stat-cell"><div class="stat-cell-label">Bruto acumulado</div><div class="stat-cell-value" id="stat-total">—</div></div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('historico')">Historial</button>
+    <button class="tab-btn" onclick="switchTab('alertas')">Alertas</button>
+    <button class="tab-btn" onclick="switchTab('nueva')">Añadir</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="install-banner" id="install-banner">
+    <div class="install-text"><strong>Instalar en pantalla de inicio</strong>Accede sin navegador, funciona sin conexión.</div>
+    <button class="btn-install" id="install-btn">Instalar</button>
+  </div>
+
+  <!-- HISTORICO -->
+  <div id="tab-historico">
+    <div class="month-pills" id="month-pills"></div>
+    <div id="nomina-detail"></div>
+  </div>
+
+  <!-- ALERTAS -->
+  <div id="tab-alertas" style="display:none">
+    <div id="alertas-content"></div>
+  </div>
+
+  <!-- AÑADIR -->
+  <div id="tab-nueva" style="display:none">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Añadir nómina</div>
+          <div class="card-sub">Sube el PDF o introduce los datos manualmente</div>
+        </div>
+      </div>
+      <div style="padding:18px">
+
+        <!-- Sub-tabs PDF / Manual -->
+        <div class="add-tabs">
+          <button class="add-tab active" onclick="switchAddTab('pdf')">📄 Subir PDF</button>
+          <button class="add-tab" onclick="switchAddTab('manual')">✏️ Manual</button>
+        </div>
+
+        <!-- PDF TAB -->
+        <div id="add-pdf">
+          <div class="upload-zone" id="upload-zone" onclick="document.getElementById('pdf-input').click()"
+               ondragover="event.preventDefault();this.classList.add('drag')"
+               ondragleave="this.classList.remove('drag')"
+               ondrop="handleDrop(event)">
+            <div class="upload-icon" id="upload-icon">📄</div>
+            <div class="upload-title" id="upload-title">Toca para subir el PDF de tu nómina</div>
+            <div class="upload-sub" id="upload-sub">Los datos se extraen automáticamente</div>
+          </div>
+          <input type="file" id="pdf-input" class="upload-input" accept="application/pdf" onchange="handleFile(this.files[0])">
+
+          <div id="extracted-preview" style="display:none"></div>
+
+          <div id="pdf-form" style="display:none">
+            <div class="form-grid" style="margin-bottom:12px">
+              <div class="form-field"><label class="form-label">Mes</label>
+                <select class="form-select" id="pf-mes"><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select></div>
+              <div class="form-field"><label class="form-label">Año</label><input class="form-input" type="number" id="pf-anio" value="2026"/></div>
+              <div class="form-field"><label class="form-label">Salario base (€)</label><input class="form-input" type="number" step="0.01" id="pf-salarioBase"/></div>
+              <div class="form-field"><label class="form-label">Prorrata (€)</label><input class="form-input" type="number" step="0.01" id="pf-prorrata"/></div>
+              <div class="form-field"><label class="form-label">Bolsa vacaciones (€)</label><input class="form-input" type="number" step="0.01" id="pf-bolsaVacaciones"/></div>
+              <div class="form-field"><label class="form-label">Plus convenio (€)</label><input class="form-input" type="number" step="0.01" id="pf-plusConvenio"/></div>
+              <div class="form-field"><label class="form-label">Plus transporte (€)</label><input class="form-input" type="number" step="0.01" id="pf-plusTransporte"/></div>
+              <div class="form-field"><label class="form-label">Comisiones (€)</label><input class="form-input" type="number" step="0.01" id="pf-comisiones"/></div>
+              <div class="form-field"><label class="form-label">Complemento Enf/Acc. (€)</label><input class="form-input" type="number" step="0.01" id="pf-complementoEnf"/></div>
+              <div class="form-field"><label class="form-label">Total devengado (€)</label><input class="form-input" type="number" step="0.01" id="pf-totalDevengado"/></div>
+              <div class="form-field"><label class="form-label">Base cotización SS (€)</label><input class="form-input" type="number" step="0.01" id="pf-baseCotizacion"/></div>
+              <div class="form-field"><label class="form-label">Total SS trabajador (€)</label><input class="form-input" type="number" step="0.01" id="pf-totalSS"/></div>
+              <div class="form-field"><label class="form-label">IRPF %</label><input class="form-input" type="number" step="0.01" id="pf-irpfPct"/></div>
+              <div class="form-field"><label class="form-label">IRPF importe (€)</label><input class="form-input" type="number" step="0.01" id="pf-irpfImporte"/></div>
+              <div class="form-field"><label class="form-label">Total deducciones (€)</label><input class="form-input" type="number" step="0.01" id="pf-totalDeducciones"/></div>
+              <div class="form-field"><label class="form-label">Líquido a percibir (€)</label><input class="form-input" type="number" step="0.01" id="pf-liquidoPercibir"/></div>
+              <div class="form-field full"><label class="form-label">Notas</label><textarea class="form-textarea" id="pf-notas" placeholder="Observaciones adicionales..."></textarea></div>
+            </div>
+            <button class="btn-primary" onclick="saveFromPdf()">Guardar nómina</button>
+          </div>
+        </div>
+
+        <!-- MANUAL TAB -->
+        <div id="add-manual" style="display:none">
+          <div class="form-grid">
+            <div class="form-field"><label class="form-label">Mes</label>
+              <select class="form-select" id="f-mes"><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select></div>
+            <div class="form-field"><label class="form-label">Año</label><input class="form-input" type="number" id="f-anio" value="2026"/></div>
+            <div class="form-field"><label class="form-label">Salario base (€)</label><input class="form-input" type="number" step="0.01" id="f-salarioBase" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Prorrata pagas (€)</label><input class="form-input" type="number" step="0.01" id="f-prorrata" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Bolsa vacaciones (€)</label><input class="form-input" type="number" step="0.01" id="f-bolsaVacaciones" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Plus convenio (€)</label><input class="form-input" type="number" step="0.01" id="f-plusConvenio" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Plus transporte (€)</label><input class="form-input" type="number" step="0.01" id="f-plusTransporte" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Comisiones (€)</label><input class="form-input" type="number" step="0.01" id="f-comisiones" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Complemento Enf/Acc. (€)</label><input class="form-input" type="number" step="0.01" id="f-complementoEnf" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Total devengado (€)</label><input class="form-input" type="number" step="0.01" id="f-totalDevengado" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Base cotización SS (€)</label><input class="form-input" type="number" step="0.01" id="f-baseCotizacion" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Total SS trabajador (€)</label><input class="form-input" type="number" step="0.01" id="f-totalSS" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">IRPF %</label><input class="form-input" type="number" step="0.01" id="f-irpfPct" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">IRPF importe (€)</label><input class="form-input" type="number" step="0.01" id="f-irpfImporte" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Total deducciones (€)</label><input class="form-input" type="number" step="0.01" id="f-totalDeducciones" placeholder="0.00"/></div>
+            <div class="form-field"><label class="form-label">Líquido a percibir (€)</label><input class="form-input" type="number" step="0.01" id="f-liquidoPercibir" placeholder="0.00"/></div>
+            <div class="form-field full"><label class="form-label">Notas</label><textarea class="form-textarea" id="f-notas" placeholder="Observaciones..."></textarea></div>
+          </div>
+          <button class="btn-primary" onclick="addNomina()">Guardar nómina</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONFIRM DELETE OVERLAY -->
+<div class="confirm-overlay" id="confirm-overlay" onclick="cancelDelete(event)">
+  <div class="confirm-box">
+    <div class="confirm-title">Eliminar nómina</div>
+    <div class="confirm-sub" id="confirm-sub">¿Seguro que quieres eliminar esta nómina? Esta acción no se puede deshacer.</div>
+    <div class="confirm-actions">
+      <button class="btn-confirm-delete" onclick="confirmDelete()">Sí, eliminar</button>
+      <button class="btn-confirm-cancel" onclick="closeConfirm()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'nominas-v3';
+
+const INITIAL = [
+  {mes:"Enero",  anio:2026,salarioBase:993.92, prorrata:248.48,bolsaVacaciones:41.41, plusConvenio:133.57,plusTransporte:105.40,comisiones:0,    complementoEnf:89.96,totalDevengado:1612.74,baseCotizacion:1575.70,totalSS:102.42,irpfPct:7.21,irpfImporte:116.28,totalDeducciones:218.70,liquidoPercibir:1394.04,notas:"Baja por enfermedad días 15/16. Salario base anterior a subida de convenio."},
+  {mes:"Febrero",anio:2026,salarioBase:1028.19,prorrata:257.05,bolsaVacaciones:42.84, plusConvenio:138.18,plusTransporte:105.40,comisiones:25.00,complementoEnf:0,    totalDevengado:1596.66,baseCotizacion:1596.66,totalSS:103.78,irpfPct:7.14,irpfImporte:114.00,totalDeducciones:217.78,liquidoPercibir:1378.88,notas:"Primera nómina con salario actualizado. Sin baja. Comisiones por primera vez."},
+  {mes:"Marzo",  anio:2026,salarioBase:1028.19,prorrata:257.05,bolsaVacaciones:42.84, plusConvenio:138.18,plusTransporte:110.67,comisiones:25.00,complementoEnf:45.24, totalDevengado:1647.17,baseCotizacion:1601.93,totalSS:104.12,irpfPct:7.27,irpfImporte:119.75,totalDeducciones:223.87,liquidoPercibir:1423.30,notas:"Baja por enfermedad días 27/27. Plus transporte sube a 110,67€."},
+  {mes:"Abril",  anio:2026,salarioBase:1028.19,prorrata:257.05,bolsaVacaciones:42.84, plusConvenio:138.18,plusTransporte:115.94,comisiones:25.00,complementoEnf:0,    totalDevengado:1607.20,baseCotizacion:1607.20,totalSS:104.47,irpfPct:7.29,irpfImporte:117.16,totalDeducciones:221.63,liquidoPercibir:1385.57,notas:"Nómina sin incidencias. Plus transporte sube a 115,94€. Sin complemento de baja."}
+];
+
+let nominas=[], selectedIdx=0;
+
+function load(){
+  try{
+    const s=localStorage.getItem(STORAGE_KEY);
+    nominas=s?JSON.parse(s):INITIAL;
+    if(!s) localStorage.setItem(STORAGE_KEY,JSON.stringify(INITIAL));
+  }catch{nominas=INITIAL;}
+  selectedIdx=nominas.length-1;
+  render();
+}
+
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(nominas));}catch{}}
+
+function fmt(n){return(Number(n)||0).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'}
+
+function diffHtml(a,b,key){
+  if(!b)return'';
+  const d=(a[key]||0)-(b[key]||0);
+  if(Math.abs(d)<0.01)return'';
+  return`<span class="${d>0?'diff-up':'diff-down'}">${d>0?'+':'−'}${Math.abs(d).toFixed(2)}</span>`;
+}
+
+function updateStats(){
+  document.getElementById('stat-count').textContent=nominas.length;
+  if(!nominas.length)return;
+  const last=nominas[nominas.length-1];
+  document.getElementById('stat-last').textContent=fmt(last.liquidoPercibir);
+  document.getElementById('stat-avg').textContent=fmt(nominas.reduce((a,n)=>a+n.liquidoPercibir,0)/nominas.length);
+  document.getElementById('stat-total').textContent=fmt(nominas.reduce((a,n)=>a+n.totalDevengado,0));
+}
+
+function renderPills(){
+  document.getElementById('month-pills').innerHTML=nominas.map((n,i)=>`
+    <button class="month-pill ${i===selectedIdx?'active':''}" onclick="selectNomina(${i})">${n.mes} ${n.anio}</button>`).join('');
+}
+
+function renderDetail(){
+  const nom=nominas[selectedIdx], prev=selectedIdx>0?nominas[selectedIdx-1]:null;
+  if(!nom){document.getElementById('nomina-detail').innerHTML=`<div class="empty-state"><div class="icon">📭</div><p>Sin nóminas. Añade la primera.</p></div>`;return;}
+  const devengos=[['Salario base','salarioBase'],['Prorrata pagas extra','prorrata'],['Bolsa de vacaciones','bolsaVacaciones'],['Plus convenio','plusConvenio'],['Plus transporte','plusTransporte'],['Comisiones','comisiones'],['Complemento Enf/Acc.','complementoEnf']].filter(([,k])=>(nom[k]||0)>0);
+  document.getElementById('nomina-detail').innerHTML=`
+    <div class="card">
+      <div class="card-head">
+        <div><div class="card-title">${nom.mes} ${nom.anio}</div><div class="card-sub">Base cotización: ${fmt(nom.baseCotizacion)}</div></div>
+        <div><div class="neto-label">Líquido</div><div class="neto-value">${fmt(nom.liquidoPercibir)}</div></div>
+      </div>
+      <div class="section-label">Devengos</div>
+      ${devengos.map(([l,k])=>`<div class="data-row"><span class="row-label">${l}</span><span class="row-value">${fmt(nom[k])} ${diffHtml(nom,prev,k)}</span></div>`).join('')}
+      <div class="total-row" style="background:var(--gray100);border-top:1px solid var(--gray200)">
+        <span class="total-label">Total devengado</span>
+        <span class="total-value green">${fmt(nom.totalDevengado)} ${diffHtml(nom,prev,'totalDevengado')}</span>
+      </div>
+      <div class="section-label">Deducciones</div>
+      <div class="data-row"><span class="row-label">SS Contingencias comunes (4,70%)</span><span class="row-value red">−${fmt(nom.totalSS)} ${diffHtml(nom,prev,'totalSS')}</span></div>
+      <div class="data-row"><span class="row-label">IRPF (${nom.irpfPct}%)</span><span class="row-value red">−${fmt(nom.irpfImporte)} ${diffHtml(nom,prev,'irpfImporte')}</span></div>
+      <div class="total-row" style="background:var(--gray100);border-top:1px solid var(--gray200)">
+        <span class="total-label">Total deducciones</span><span class="total-value red">−${fmt(nom.totalDeducciones)}</span>
+      </div>
+      ${nom.notas?`<div style="height:14px"></div><div class="notes-box"><div class="notes-label">Notas</div><div class="notes-text">${nom.notas}</div></div>`:'<div style="height:4px"></div>'}
+      <div style="padding:0 18px 18px">
+        <button class="btn-delete" onclick="askDelete(${selectedIdx})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+          Eliminar esta nómina
+        </button>
+      </div>
+    </div>`;
+}
+
+function getAlertas(list){
+  const msgs=[];
+  if(list.length<2)return msgs;
+  const last=list[list.length-1],prev=list[list.length-2];
+  if(last.salarioBase!==prev.salarioBase){const d=last.salarioBase-prev.salarioBase;msgs.push({type:d>0?'ok':'alert',msg:`Salario base ${d>0?'sube':'baja'} de ${fmt(prev.salarioBase)} a ${fmt(last.salarioBase)}`});}
+  const dL=last.liquidoPercibir-prev.liquidoPercibir;
+  if(Math.abs(dL)>100)msgs.push({type:dL>0?'ok':'warn',msg:`Neto varía ${dL>0?'+':''}${dL.toFixed(2)} € respecto al mes anterior`});
+  const dI=last.irpfPct-prev.irpfPct;
+  if(Math.abs(dI)>1)msgs.push({type:'warn',msg:`IRPF varía ${dI>0?'+':''}${dI.toFixed(2)}% — posible regularización`});
+  if((last.plusTransporte||0)!==(prev.plusTransporte||0))msgs.push({type:'info',msg:`Plus transporte cambia de ${fmt(prev.plusTransporte)} a ${fmt(last.plusTransporte)}`});
+  if((last.complementoEnf||0)>0)msgs.push({type:'info',msg:`Complemento enfermedad/accidente: ${fmt(last.complementoEnf)} — días de baja este mes`});
+  if(!msgs.length)msgs.push({type:'ok',msg:'Sin irregularidades detectadas respecto al mes anterior'});
+  return msgs;
+}
+
+function renderAlertas(){
+  if(nominas.length<2){document.getElementById('alertas-content').innerHTML=`<div class="empty-state"><div class="icon">🔔</div><p>Necesitas al menos 2 nóminas<br>para detectar variaciones.</p></div>`;return;}
+  const icons={ok:'✓',warn:'!',alert:'✗',info:'i'};
+  let html='';
+  for(let i=1;i<nominas.length;i++){
+    const msgs=getAlertas(nominas.slice(0,i+1));
+    html+=`<div class="alert-group"><div class="alert-group-title">${nominas[i-1].mes} → ${nominas[i].mes} ${nominas[i].anio}</div>${msgs.map(m=>`<div class="alert-item alert-${m.type}"><span style="font-weight:700;flex-shrink:0">${icons[m.type]}</span><span>${m.msg}</span></div>`).join('')}</div>`;
+  }
+  html+=`<div class="pending-box"><div class="pending-title">Pendiente de verificar</div><div class="pending-text">La subida salarial de enero a febrero (+34,27 €/mes) puede ser de convenio. Si tuvo efecto desde enero, podrías tener derecho a un atraso de <strong>~34,27 €</strong>.</div></div>`;
+  document.getElementById('alertas-content').innerHTML=html;
+}
+
+function render(){updateStats();renderPills();renderDetail();renderAlertas();}
+function selectNomina(i){selectedIdx=i;renderPills();renderDetail();}
+
+let deleteIdx=null;
+function askDelete(i){
+  deleteIdx=i;
+  const nom=nominas[i];
+  document.getElementById('confirm-sub').textContent=`¿Seguro que quieres eliminar la nómina de ${nom.mes} ${nom.anio}? Esta acción no se puede deshacer.`;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function confirmDelete(){
+  if(deleteIdx===null)return;
+  nominas.splice(deleteIdx,1);
+  selectedIdx=Math.min(deleteIdx,nominas.length-1);
+  if(selectedIdx<0)selectedIdx=0;
+  save();render();
+  closeConfirm();
+}
+function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('show');deleteIdx=null;}
+function cancelDelete(e){if(e.target===document.getElementById('confirm-overlay'))closeConfirm();}
+
+function switchTab(tab){
+  ['historico','alertas','nueva'].forEach(t=>{document.getElementById('tab-'+t).style.display=t===tab?'block':'none';});
+  document.querySelectorAll('.tab-btn').forEach((btn,i)=>{btn.classList.toggle('active',['historico','alertas','nueva'][i]===tab);});
+}
+
+function switchAddTab(tab){
+  document.getElementById('add-pdf').style.display=tab==='pdf'?'block':'none';
+  document.getElementById('add-manual').style.display=tab==='manual'?'block':'none';
+  document.querySelectorAll('.add-tab').forEach((btn,i)=>{btn.classList.toggle('active',['pdf','manual'][i]===tab);});
+}
+
+// ── PDF EXTRACTION ──────────────────────────────────────────
+async function handleDrop(e){
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('drag');
+  const file=e.dataTransfer.files[0];
+  if(file&&file.type==='application/pdf')await handleFile(file);
+}
+
+async function handleFile(file){
+  if(!file)return;
+  const zone=document.getElementById('upload-zone');
+  zone.className='upload-zone loading';
+  document.getElementById('upload-icon').textContent='';
+  document.getElementById('upload-title').innerHTML=`<span class="spinner"></span>Extrayendo datos...`;
+  document.getElementById('upload-sub').textContent='Analizando el PDF con IA';
+  document.getElementById('extracted-preview').style.display='none';
+  document.getElementById('pdf-form').style.display='none';
+
+  try{
+    const base64=await toBase64(file);
+    const data=await extractFromPDF(base64);
+    zone.className='upload-zone success';
+    document.getElementById('upload-icon').textContent='✓';
+    document.getElementById('upload-title').textContent='Datos extraídos correctamente';
+    document.getElementById('upload-sub').textContent='Revisa y confirma antes de guardar';
+    fillPdfForm(data);
+    showExtractedPreview(data);
+    document.getElementById('pdf-form').style.display='block';
+  }catch(err){
+    zone.className='upload-zone';
+    document.getElementById('upload-icon').textContent='⚠️';
+    document.getElementById('upload-title').textContent='No se pudo extraer. Revisa los campos.';
+    document.getElementById('upload-sub').textContent='Puedes corregir los valores manualmente';
+    document.getElementById('pdf-form').style.display='block';
+    console.error(err);
+  }
+}
+
+function toBase64(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res(r.result.split(',')[1]);
+    r.onerror=()=>rej(new Error('read error'));
+    r.readAsDataURL(file);
+  });
+}
+
+async function extractFromPDF(base64){
+  const prompt=`Eres un extractor de datos de nóminas españolas. Del PDF adjunto extrae EXACTAMENTE los siguientes campos numéricos. Responde SOLO con un objeto JSON válido, sin texto adicional, sin markdown, sin explicaciones.
+
+Campos requeridos (usa 0 si no aparece el concepto):
+{
+  "mes": "nombre del mes en español (ej: Enero)",
+  "anio": número del año,
+  "salarioBase": número,
+  "prorrata": número (prorrata pagas extraordinarias),
+  "bolsaVacaciones": número,
+  "plusConvenio": número,
+  "plusTransporte": número,
+  "comisiones": número,
+  "complementoEnf": número (complemento enfermedad/accidente),
+  "totalDevengado": número (A. TOTAL DEVENGADO),
+  "baseCotizacion": número (base cotización SS / importe remuneración mensual),
+  "totalSS": número (TOTAL APORTACIONES del trabajador),
+  "irpfPct": número (porcentaje IRPF),
+  "irpfImporte": número (importe IRPF retenido),
+  "totalDeducciones": número (B. TOTAL A DEDUCIR),
+  "liquidoPercibir": número (LÍQUIDO TOTAL A PERCIBIR),
+  "notas": "observaciones relevantes como bajas, complementos especiales, etc. Cadena vacía si no hay nada destacable"
+}
+
+Importante: los números usan coma decimal en español (1.234,56), conviértelos a formato numérico estándar (1234.56).`;
+
+  const resp=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1000,
+      messages:[{role:'user',content:[
+        {type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}},
+        {type:'text',text:prompt}
+      ]}]
+    })
+  });
+  if(!resp.ok)throw new Error(`API error ${resp.status}`);
+  const json=await resp.json();
+  const text=json.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+  return JSON.parse(text);
+}
+
+function fillPdfForm(d){
+  const MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const sel=document.getElementById('pf-mes');
+  const idx=MESES.findIndex(m=>m.toLowerCase()===String(d.mes||'').toLowerCase());
+  if(idx>=0)sel.selectedIndex=idx;
+  const fields=['anio','salarioBase','prorrata','bolsaVacaciones','plusConvenio','plusTransporte','comisiones','complementoEnf','totalDevengado','baseCotizacion','totalSS','irpfPct','irpfImporte','totalDeducciones','liquidoPercibir'];
+  fields.forEach(f=>{const el=document.getElementById('pf-'+f);if(el&&d[f]!==undefined)el.value=d[f]||'';});
+  const notas=document.getElementById('pf-notas');
+  if(notas)notas.value=d.notas||'';
+}
+
+function showExtractedPreview(d){
+  const preview=document.getElementById('extracted-preview');
+  preview.style.display='block';
+  preview.innerHTML=`
+    <div class="extracted-title">✓ Datos extraídos — ${d.mes} ${d.anio}</div>
+    <div class="extracted-grid">
+      <div class="extracted-item">Bruto: <span>${fmt(d.totalDevengado)}</span></div>
+      <div class="extracted-item">Neto: <span>${fmt(d.liquidoPercibir)}</span></div>
+      <div class="extracted-item">Salario base: <span>${fmt(d.salarioBase)}</span></div>
+      <div class="extracted-item">IRPF: <span>${d.irpfPct}%</span></div>
+    </div>`;
+}
+
+function saveFromPdf(){
+  const g=id=>{const el=document.getElementById('pf-'+id);return parseFloat(el?el.value:0)||0;};
+  const mes=document.getElementById('pf-mes').value;
+  const anio=parseInt(document.getElementById('pf-anio').value)||2026;
+  nominas.push({mes,anio,salarioBase:g('salarioBase'),prorrata:g('prorrata'),bolsaVacaciones:g('bolsaVacaciones'),plusConvenio:g('plusConvenio'),plusTransporte:g('plusTransporte'),comisiones:g('comisiones'),complementoEnf:g('complementoEnf'),totalDevengado:g('totalDevengado'),baseCotizacion:g('baseCotizacion'),totalSS:g('totalSS'),irpfPct:g('irpfPct'),irpfImporte:g('irpfImporte'),totalDeducciones:g('totalDeducciones'),liquidoPercibir:g('liquidoPercibir'),notas:document.getElementById('pf-notas').value});
+  selectedIdx=nominas.length-1;
+  save();render();switchTab('historico');
+  // reset
+  const zone=document.getElementById('upload-zone');
+  zone.className='upload-zone';
+  document.getElementById('upload-icon').textContent='📄';
+  document.getElementById('upload-title').textContent='Toca para subir el PDF de tu nómina';
+  document.getElementById('upload-sub').textContent='Los datos se extraen automáticamente';
+  document.getElementById('extracted-preview').style.display='none';
+  document.getElementById('pdf-form').style.display='none';
+  document.getElementById('pdf-input').value='';
+}
+
+function addNomina(){
+  const g=id=>parseFloat(document.getElementById('f-'+id).value)||0;
+  nominas.push({mes:document.getElementById('f-mes').value,anio:parseInt(document.getElementById('f-anio').value)||2026,salarioBase:g('salarioBase'),prorrata:g('prorrata'),bolsaVacaciones:g('bolsaVacaciones'),plusConvenio:g('plusConvenio'),plusTransporte:g('plusTransporte'),comisiones:g('comisiones'),complementoEnf:g('complementoEnf'),totalDevengado:g('totalDevengado'),baseCotizacion:g('baseCotizacion'),totalSS:g('totalSS'),irpfPct:g('irpfPct'),irpfImporte:g('irpfImporte'),totalDeducciones:g('totalDeducciones'),liquidoPercibir:g('liquidoPercibir'),notas:document.getElementById('f-notas').value});
+  selectedIdx=nominas.length-1;
+  save();render();switchTab('historico');
+  ['salarioBase','prorrata','bolsaVacaciones','plusConvenio','plusTransporte','comisiones','complementoEnf','totalDevengado','baseCotizacion','totalSS','irpfPct','irpfImporte','totalDeducciones','liquidoPercibir'].forEach(id=>{const el=document.getElementById('f-'+id);if(el)el.value='';});
+  document.getElementById('f-notas').value='';
+}
+
+// PWA install
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('install-banner').style.display='flex';});
+document.getElementById('install-btn').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted')document.getElementById('install-banner').style.display='none';deferredPrompt=null;});
+
+// Service Worker offline
+if('serviceWorker'in navigator){const sw=`const C='n-v3';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['.']))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>r))))`;navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});}
+
+load();
+</script>
+</body>
+</html>

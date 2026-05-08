@@ -160,6 +160,69 @@
     .empty-state .icon{font-size:2rem;margin-bottom:12px}
     .empty-state p{font-size:.82rem;line-height:1.7}
 
+    /* CHART */
+    .chart-wrap{background:var(--white);border-radius:10px;border:1px solid var(--gray200);padding:16px 18px 12px;margin-bottom:12px}
+    .chart-title{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--gray400);margin-bottom:14px}
+    .chart-bars{display:flex;align-items:flex-end;gap:6px;height:100px}
+    .chart-col{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+    .chart-bar-wrap{width:100%;display:flex;align-items:flex-end;height:84px}
+    .chart-bar{width:100%;border-radius:4px 4px 0 0;background:var(--gray200);transition:height .3s ease;cursor:pointer;position:relative}
+    .chart-bar.active{background:var(--black)}
+    .chart-bar.bruto{background:var(--gray200)}
+    .chart-bar.bruto.active{background:var(--gray600)}
+    .chart-bar-label{font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--gray400);text-align:center;white-space:nowrap}
+    .chart-bar-label.active{color:var(--black);font-weight:600}
+    .chart-legend{display:flex;gap:14px;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray100)}
+    .chart-legend-item{display:flex;align-items:center;gap:5px;font-size:.68rem;color:var(--gray600)}
+    .chart-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+    .chart-toggle{display:flex;gap:0;background:var(--gray100);border-radius:6px;padding:2px;margin-bottom:12px;width:fit-content}
+    .chart-toggle-btn{padding:5px 12px;border:none;background:transparent;border-radius:5px;font-family:'IBM Plex Sans',sans-serif;font-size:.72rem;font-weight:500;color:var(--gray400);cursor:pointer;transition:all .12s}
+    .chart-toggle-btn.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+    /* DERECHOS PENDIENTES */
+    .derechos-summary{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray200);border-radius:10px;overflow:hidden;margin-bottom:12px;border:1px solid var(--gray200)}
+    .derechos-summary-cell{background:var(--white);padding:13px 16px}
+    .derechos-summary-label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:4px}
+    .derechos-summary-value{font-family:'IBM Plex Mono',monospace;font-size:1.1rem;font-weight:600;color:var(--black)}
+    .derechos-summary-value.amber{color:var(--amber)}
+    .derecho-item{background:var(--white);border-radius:10px;border:1px solid var(--gray200);padding:14px 16px;margin-bottom:8px;transition:opacity .2s}
+    .derecho-item.resuelto{opacity:.55}
+    .derecho-item-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+    .derecho-tipo{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding:2px 8px;border-radius:3px}
+    .derecho-tipo.festivo{background:var(--blue-light);color:var(--blue)}
+    .derecho-tipo.atraso{background:var(--amber-light);color:var(--amber)}
+    .derecho-tipo.otro{background:var(--gray100);color:var(--gray600)}
+    .derecho-estado{font-size:.65rem;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid transparent}
+    .derecho-estado.pendiente{background:var(--red-light);color:var(--red);border-color:#fecaca}
+    .derecho-estado.resuelto{background:var(--accent-light);color:var(--accent);border-color:#bbf7d0}
+    .derecho-desc{font-size:.82rem;color:var(--gray600);line-height:1.55;margin-bottom:8px}
+    .derecho-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .derecho-importe{font-family:'IBM Plex Mono',monospace;font-size:.88rem;font-weight:600;color:var(--black)}
+    .derecho-fecha{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--gray400)}
+    .derecho-actions{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray100)}
+    .btn-resolver{flex:1;padding:7px;border-radius:6px;border:1px solid #bbf7d0;background:var(--accent-light);color:var(--accent);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.75rem;cursor:pointer;transition:all .12s}
+    .btn-resolver.undo{border-color:var(--gray200);background:var(--gray100);color:var(--gray600)}
+    .btn-derecho-del{padding:7px 12px;border-radius:6px;border:1px solid #fecaca;background:var(--red-light);color:var(--red);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.75rem;cursor:pointer}
+    .derechos-section-title{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--gray400);margin:16px 0 8px 2px}
+    .derecho-form{background:var(--white);border-radius:10px;border:1px solid var(--gray200);padding:16px 18px;margin-bottom:12px}
+    .derecho-form-title{font-size:.82rem;font-weight:600;margin-bottom:12px;color:var(--black)}
+
+    /* NEWS */
+    .news-item{background:var(--white);border-radius:10px;border:1px solid var(--gray200);padding:14px 16px;margin-bottom:8px}
+    .news-item-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+    .news-badge{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding:2px 8px;border-radius:3px}
+    .news-badge.convenio{background:var(--blue-light);color:var(--blue)}
+    .news-badge.boe{background:var(--amber-light);color:var(--amber)}
+    .news-badge.ss{background:var(--accent-light);color:var(--accent)}
+    .news-badge.irpf{background:var(--red-light);color:var(--red)}
+    .news-badge.otro{background:var(--gray100);color:var(--gray600)}
+    .news-date{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--gray400)}
+    .news-text{font-size:.82rem;color:var(--gray600);line-height:1.55}
+    .news-delete{background:none;border:none;color:var(--gray400);cursor:pointer;font-size:.75rem;padding:0;margin-top:6px;display:flex;align-items:center;gap:4px}
+    .news-delete:hover{color:var(--red)}
+    .news-form{background:var(--white);border-radius:10px;border:1px solid var(--gray200);padding:16px 18px;margin-bottom:12px}
+    .news-form-title{font-size:.82rem;font-weight:600;margin-bottom:12px;color:var(--black)}
+
     /* DELETE */
     .btn-delete{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:11px;border-radius:8px;border:1px solid #fecaca;background:var(--red-light);color:var(--red);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;margin-top:4px;transition:all .12s}
     .btn-delete:active{background:#fecaca}
@@ -193,9 +256,11 @@
 
 <div class="tabs-wrap">
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('historico')">Historial</button>
-    <button class="tab-btn" onclick="switchTab('alertas')">Alertas</button>
-    <button class="tab-btn" onclick="switchTab('nueva')">Añadir</button>
+    <button class="tab-btn active" onclick="switchTab('historico')">📊 Historial</button>
+    <button class="tab-btn" onclick="switchTab('alertas')">🔔 Alertas</button>
+    <button class="tab-btn" onclick="switchTab('derechos')">⚖️ Derechos</button>
+    <button class="tab-btn" onclick="switchTab('noticias')">📰 Noticias</button>
+    <button class="tab-btn" onclick="switchTab('nueva')">➕ Añadir</button>
   </div>
 </div>
 
@@ -208,6 +273,10 @@
 
   <!-- HISTORICO -->
   <div id="tab-historico">
+    <div class="chart-wrap">
+      <div class="chart-title">Evolución mensual — Neto</div>
+      <div class="chart-bars" id="chart-bars"></div>
+    </div>
     <div class="month-pills" id="month-pills"></div>
     <div id="nomina-detail"></div>
   </div>
@@ -215,6 +284,78 @@
   <!-- ALERTAS -->
   <div id="tab-alertas" style="display:none">
     <div id="alertas-content"></div>
+  </div>
+
+  <!-- DERECHOS PENDIENTES -->
+  <div id="tab-derechos" style="display:none">
+    <div class="derechos-summary" id="derechos-summary"></div>
+
+    <!-- Formulario nuevo derecho -->
+    <div class="derecho-form">
+      <div class="derecho-form-title">Añadir derecho pendiente</div>
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label">Tipo</label>
+          <select class="form-select" id="d-tipo">
+            <option value="atraso">Atraso salarial</option>
+            <option value="festivo">Festivo no compensado</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Fecha origen</label>
+          <input class="form-input" type="date" id="d-fecha"/>
+        </div>
+        <div class="form-field full">
+          <label class="form-label">Descripción</label>
+          <textarea class="form-textarea" id="d-desc" placeholder="Ej: Festivo 28/02/2026 (sábado) sin compensar..."></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Importe estimado (€)</label>
+          <input class="form-input" type="number" step="0.01" id="d-importe" placeholder="0.00"/>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Referencia</label>
+          <input class="form-input" type="text" id="d-ref" placeholder="Ej: Nómina enero 2026"/>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="addDerecho()">Registrar derecho</button>
+    </div>
+
+    <div id="derechos-pendientes-list"></div>
+    <div id="derechos-resueltos-wrap" style="display:none">
+      <div class="derechos-section-title">Resueltos</div>
+      <div id="derechos-resueltos-list"></div>
+    </div>
+  </div>
+
+  <!-- NOTICIAS -->
+  <div id="tab-noticias" style="display:none">
+    <div class="news-form">
+      <div class="news-form-title">Añadir noticia o alerta</div>
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label">Categoría</label>
+          <select class="form-select" id="n-tipo">
+            <option value="convenio">Convenio</option>
+            <option value="boe">BOE / BOJA</option>
+            <option value="ss">Seguridad Social</option>
+            <option value="irpf">IRPF</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Fecha</label>
+          <input class="form-input" type="date" id="n-fecha" />
+        </div>
+        <div class="form-field full">
+          <label class="form-label">Descripción</label>
+          <textarea class="form-textarea" id="n-texto" placeholder="Ej: Convenio Oficinas Sevilla — subida salarial del 2,5% con efecto enero 2026..."></textarea>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="addNoticia()">Guardar noticia</button>
+    </div>
+    <div id="noticias-list"></div>
   </div>
 
   <!-- AÑADIR -->
@@ -317,7 +458,15 @@
 </div>
 
 <script>
-const STORAGE_KEY = 'nominas-v3';
+const STORAGE_KEY = 'nominas-v4';
+const NOTICIAS_KEY = 'nominas-noticias-v1';
+const DERECHOS_KEY = 'nominas-derechos-v1';
+
+const INITIAL_DERECHOS = [
+  {id:'d1', tipo:'atraso',  fecha:'2026-01-31', desc:'Subida de convenio no aplicada en enero 2026. El salario base debería haber sido 1.028,19 € en lugar de 993,92 €.', importe:34.27, ref:'Nómina enero 2026', resuelto:false},
+  {id:'d2', tipo:'festivo', fecha:'2026-02-28', desc:'Festivo 28 de febrero (sábado) sin compensar. Sentencia TS 997/2024: los festivos en fin de semana deben ser compensados con día libre o remuneración.', importe:0, ref:'Tribunal Supremo 997/2024', resuelto:false},
+  {id:'d3', tipo:'festivo', fecha:'2026-08-15', desc:'Festivo 15 de agosto (sábado) sin compensar. Sentencia TS 997/2024: los festivos en fin de semana deben ser compensados con día libre o remuneración.', importe:0, ref:'Tribunal Supremo 997/2024', resuelto:false},
+];
 
 const INITIAL = [
   {mes:"Enero",  anio:2026,salarioBase:993.92, prorrata:248.48,bolsaVacaciones:41.41, plusConvenio:133.57,plusTransporte:105.40,comisiones:0,    complementoEnf:89.96,totalDevengado:1612.74,baseCotizacion:1575.70,totalSS:102.42,irpfPct:7.21,irpfImporte:116.28,totalDeducciones:218.70,liquidoPercibir:1394.04,notas:"Baja por enfermedad días 15/16. Salario base anterior a subida de convenio."},
@@ -326,7 +475,7 @@ const INITIAL = [
   {mes:"Abril",  anio:2026,salarioBase:1028.19,prorrata:257.05,bolsaVacaciones:42.84, plusConvenio:138.18,plusTransporte:115.94,comisiones:25.00,complementoEnf:0,    totalDevengado:1607.20,baseCotizacion:1607.20,totalSS:104.47,irpfPct:7.29,irpfImporte:117.16,totalDeducciones:221.63,liquidoPercibir:1385.57,notas:"Nómina sin incidencias. Plus transporte sube a 115,94€. Sin complemento de baja."}
 ];
 
-let nominas=[], selectedIdx=0;
+let nominas=[], selectedIdx=0, chartMode='neto', noticias=[], derechos=[];
 
 function load(){
   try{
@@ -334,11 +483,24 @@ function load(){
     nominas=s?JSON.parse(s):INITIAL;
     if(!s) localStorage.setItem(STORAGE_KEY,JSON.stringify(INITIAL));
   }catch{nominas=INITIAL;}
+  try{
+    const n=localStorage.getItem(NOTICIAS_KEY);
+    noticias=n?JSON.parse(n):[];
+  }catch{noticias=[];}
+  try{
+    const d=localStorage.getItem(DERECHOS_KEY);
+    derechos=d?JSON.parse(d):INITIAL_DERECHOS;
+    if(!d) localStorage.setItem(DERECHOS_KEY,JSON.stringify(INITIAL_DERECHOS));
+  }catch{derechos=INITIAL_DERECHOS;}
+  document.getElementById('n-fecha').value=new Date().toISOString().split('T')[0];
+  document.getElementById('d-fecha').value=new Date().toISOString().split('T')[0];
   selectedIdx=nominas.length-1;
   render();
 }
 
 function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(nominas));}catch{}}
+function saveNoticias(){try{localStorage.setItem(NOTICIAS_KEY,JSON.stringify(noticias));}catch{}}
+function saveDerechos(){try{localStorage.setItem(DERECHOS_KEY,JSON.stringify(derechos));}catch{}}
 
 function fmt(n){return(Number(n)||0).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €'}
 
@@ -422,8 +584,136 @@ function renderAlertas(){
   document.getElementById('alertas-content').innerHTML=html;
 }
 
-function render(){updateStats();renderPills();renderDetail();renderAlertas();}
-function selectNomina(i){selectedIdx=i;renderPills();renderDetail();}
+function renderChart(){
+  const container=document.getElementById('chart-bars');
+  if(!container||!nominas.length){return;}
+  const values=nominas.map(n=>chartMode==='neto'?n.liquidoPercibir:n.totalDevengado);
+  const max=Math.max(...values);
+  const min=Math.min(...values)*0.92;
+  container.innerHTML=nominas.map((n,i)=>{
+    const val=values[i];
+    const pct=max===min?80:((val-min)/(max-min))*70+14;
+    const isActive=i===selectedIdx;
+    return`<div class="chart-col" onclick="selectNomina(${i})">
+      <div class="chart-bar-wrap">
+        <div class="chart-bar${isActive?' active':''}" style="height:${pct}%" title="${fmt(val)}"></div>
+      </div>
+      <div class="chart-bar-label${isActive?' active':''}">${n.mes.substring(0,3)}</div>
+    </div>`;
+  }).join('');
+}
+
+function setChartMode(mode){
+  chartMode=mode;
+  document.querySelectorAll('.chart-toggle-btn').forEach((b,i)=>b.classList.toggle('active',['neto','bruto'][i]===mode));
+  renderChart();
+}
+
+function renderNoticias(){
+  const list=document.getElementById('noticias-list');
+  if(!list)return;
+  if(!noticias.length){
+    list.innerHTML=`<div class="empty-state"><div class="icon">📰</div><p>Sin noticias registradas.<br>Añade la primera con el formulario de arriba.</p></div>`;
+    return;
+  }
+  const labels={convenio:'Convenio',boe:'BOE / BOJA',ss:'Seg. Social',irpf:'IRPF',otro:'Otro'};
+  const sorted=[...noticias].sort((a,b)=>b.fecha.localeCompare(a.fecha));
+  list.innerHTML=sorted.map((n,i)=>`
+    <div class="news-item">
+      <div class="news-item-head">
+        <span class="news-badge ${n.tipo}">${labels[n.tipo]||'Otro'}</span>
+        <span class="news-date">${formatDate(n.fecha)}</span>
+      </div>
+      <div class="news-text">${n.texto}</div>
+      <button class="news-delete" onclick="deleteNoticia('${n.id}')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Eliminar
+      </button>
+    </div>`).join('');
+}
+
+function formatDate(iso){
+  if(!iso)return'';
+  const [y,m,d]=iso.split('-');
+  const meses=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return`${d} ${meses[parseInt(m)-1]} ${y}`;
+}
+
+function addNoticia(){
+  const texto=document.getElementById('n-texto').value.trim();
+  if(!texto)return;
+  noticias.push({
+    id: Date.now().toString(),
+    tipo: document.getElementById('n-tipo').value,
+    fecha: document.getElementById('n-fecha').value,
+    texto
+  });
+  saveNoticias();
+  renderNoticias();
+  document.getElementById('n-texto').value='';
+}
+
+function deleteNoticia(id){
+  noticias=noticias.filter(n=>n.id!==id);
+  saveNoticias();
+  renderNoticias();
+}
+
+function render(){updateStats();renderChart();renderPills();renderDetail();renderAlertas();renderNoticias();renderDerechos();}
+function selectNomina(i){selectedIdx=i;renderPills();renderDetail();renderChart();}
+
+function renderDerechos(){
+  const pendientes=derechos.filter(d=>!d.resuelto);
+  const resueltos=derechos.filter(d=>d.resuelto);
+  const totalImporte=pendientes.reduce((a,d)=>a+(d.importe||0),0);
+  const summary=document.getElementById('derechos-summary');
+  if(summary) summary.innerHTML=`
+    <div class="derechos-summary-cell">
+      <div class="derechos-summary-label">Pendientes</div>
+      <div class="derechos-summary-value amber">${pendientes.length}</div>
+    </div>
+    <div class="derechos-summary-cell">
+      <div class="derechos-summary-label">Importe pendiente</div>
+      <div class="derechos-summary-value">${totalImporte>0?fmt(totalImporte):'Por determinar'}</div>
+    </div>`;
+  const tipos={festivo:'Festivo',atraso:'Atraso',otro:'Otro'};
+  const renderItem=d=>`
+    <div class="derecho-item${d.resuelto?' resuelto':''}">
+      <div class="derecho-item-head">
+        <span class="derecho-tipo ${d.tipo}">${tipos[d.tipo]||'Otro'}</span>
+        <span class="derecho-estado ${d.resuelto?'resuelto':'pendiente'}">${d.resuelto?'Resuelto':'Pendiente'}</span>
+      </div>
+      <div class="derecho-desc">${d.desc}</div>
+      <div class="derecho-meta">
+        <span class="derecho-importe">${(d.importe||0)>0?fmt(d.importe):'Importe a determinar'}</span>
+        <span class="derecho-fecha">${formatDate(d.fecha)}${d.ref?' · '+d.ref:''}</span>
+      </div>
+      <div class="derecho-actions">
+        <button class="btn-resolver${d.resuelto?' undo':''}" onclick="toggleDerecho('${d.id}')">
+          ${d.resuelto?'↩ Marcar pendiente':'✓ Marcar resuelto'}
+        </button>
+        <button class="btn-derecho-del" onclick="deleteDerecho('${d.id}')">Eliminar</button>
+      </div>
+    </div>`;
+  const pList=document.getElementById('derechos-pendientes-list');
+  if(pList) pList.innerHTML=pendientes.length
+    ?`<div class="derechos-section-title">Pendientes (${pendientes.length})</div>${pendientes.map(renderItem).join('')}`
+    :`<div class="empty-state"><div class="icon">✅</div><p>Sin derechos pendientes.<br>¡Todo en orden!</p></div>`;
+  const rWrap=document.getElementById('derechos-resueltos-wrap');
+  const rList=document.getElementById('derechos-resueltos-list');
+  if(rList&&resueltos.length){rWrap.style.display='block';rList.innerHTML=resueltos.map(renderItem).join('');}
+  else if(rWrap){rWrap.style.display='none';}
+}
+
+function addDerecho(){
+  const desc=document.getElementById('d-desc').value.trim();
+  if(!desc)return;
+  derechos.push({id:'d'+Date.now(),tipo:document.getElementById('d-tipo').value,fecha:document.getElementById('d-fecha').value,desc,importe:parseFloat(document.getElementById('d-importe').value)||0,ref:document.getElementById('d-ref').value.trim(),resuelto:false});
+  saveDerechos();renderDerechos();
+  document.getElementById('d-desc').value='';document.getElementById('d-importe').value='';document.getElementById('d-ref').value='';
+}
+function toggleDerecho(id){const d=derechos.find(d=>d.id===id);if(d){d.resuelto=!d.resuelto;saveDerechos();renderDerechos();}}
+function deleteDerecho(id){derechos=derechos.filter(d=>d.id!==id);saveDerechos();renderDerechos();}
 
 let deleteIdx=null;
 function askDelete(i){
@@ -444,8 +734,8 @@ function closeConfirm(){document.getElementById('confirm-overlay').classList.rem
 function cancelDelete(e){if(e.target===document.getElementById('confirm-overlay'))closeConfirm();}
 
 function switchTab(tab){
-  ['historico','alertas','nueva'].forEach(t=>{document.getElementById('tab-'+t).style.display=t===tab?'block':'none';});
-  document.querySelectorAll('.tab-btn').forEach((btn,i)=>{btn.classList.toggle('active',['historico','alertas','nueva'][i]===tab);});
+  ['historico','alertas','derechos','noticias','nueva'].forEach(t=>{document.getElementById('tab-'+t).style.display=t===tab?'block':'none';});
+  document.querySelectorAll('.tab-btn').forEach((btn,i)=>{btn.classList.toggle('active',['historico','alertas','derechos','noticias','nueva'][i]===tab);});
 }
 
 function switchAddTab(tab){
